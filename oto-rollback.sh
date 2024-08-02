@@ -27,6 +27,12 @@ while true; do
 
             echo "Uygulama yeniden başlatılıyor..."
             break
+        elif tail -n 10 $TEMP_LOG | grep -q "Failed to get transaction by hash: not found"; then
+            echo "'Failed to get transaction by hash: not found' hatası tespit edildi, uygulama durduruluyor ve yeniden başlatılıyor..."
+            kill $PID
+            sleep 2
+            echo "Uygulama yeniden başlatılıyor..."
+            break
         fi
     done
 
